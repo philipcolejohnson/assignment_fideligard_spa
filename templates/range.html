@@ -1,17 +1,22 @@
+<h1>Date</h1>
+
 <div class="row">
-  <div class="col-md-6">
-  {{ date.start }}
+  <div class="col-md-5">
+  {{ quotes[min].date }}
+  </div>
+  <div class="col-md-1">
+    <strong>Current:</strong>
   </div>
   <div class="col-md-3">
-  {{ quotes[date.index].date }}
+    <strong>{{ quotes[date.index].date }}</strong>
   </div>
   <div class="col-md-3" style="text-align: right">
-  {{ date.end }}
+  {{ quotes[max].date }}
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <input type=range min='0' max='364' step='1' ng-model='date.index'>
+    <input type=range min='{{ min }}' max='{{ max }}' step='1' ng-model='date.index'>
   </div>
 </div>

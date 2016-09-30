@@ -27,7 +27,7 @@ Fideligard.factory('stockService', ['yqlService', 'userService', function(yqlSer
     var currentPrice = stockService.findLatestPrice(stock, _date.index);
     var price = stockService.findLatestPrice(stock, targetDay);
 
-    return price - currentPrice;
+    return currentPrice - price;
   };
 
   return stockService;

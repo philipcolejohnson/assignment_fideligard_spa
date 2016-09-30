@@ -14,6 +14,7 @@ Fideligard.factory('yqlService', ['$http',  function($http) {
     var startDate = new Date(_start);
     var currentDate = new Date(_start);
     var endDate = new Date(_end);
+
     endDate.setDate(endDate.getDate() + 1);
     var quotes = [];
 
@@ -34,7 +35,8 @@ Fideligard.factory('yqlService', ['$http',  function($http) {
     // add stock data to array
     for (var index in data) {
       var dayDiff= new Date(data[index].Date) - startDate;
-      var dateIndex = Math.ceil(dayDiff / (1000 * 3600 * 24));
+      var dateIndex = Number( Math.ceil(dayDiff / (1000 * 3600 * 24)) ) + 0;
+
       var symbol = data[index].Symbol;
       quotes[dateIndex].data[symbol] = data[index];
     }
@@ -58,7 +60,11 @@ Fideligard.factory('yqlService', ['$http',  function($http) {
 
   yqlService.apiStocks = function() {
     var url = urlBuilder(_companies);
-    console.log("sending data");
+    // DEV URL
+    url = "/assets/dev_data.json"
+    // **************
+    console.log("sending data to:");
+    console.log(url);
 
     return $http.get(url).then(function(response) {
       console.log("data returned");

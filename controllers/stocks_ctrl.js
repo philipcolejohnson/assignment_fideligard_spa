@@ -24,7 +24,6 @@ Fideligard.controller('StocksCtrl', ['$scope', 'yqlService', 'stockService', 'us
     prices.one = stockService.calcPriceChange(stock, -1);
     prices.seven = stockService.calcPriceChange(stock, -7);
     prices.thirty = stockService.calcPriceChange(stock, -30);
-
     return prices;
   };
 

@@ -2,5 +2,8 @@ Fideligard.controller('RangeCtrl', ['$scope', 'yqlService', 'userService', funct
 
   $scope.quotes = yqlService.getStocks();
   $scope.date = userService.getDate();
+  $scope.date.index = 31; //Math.floor($scope.quotes / 2);
+  $scope.max = $scope.quotes.length - 1;
+  $scope.min = 30;
 
 }]);

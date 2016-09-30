@@ -37,9 +37,11 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
 
   .state('dashboard.trade', {
     url: '/trade',
+    params: { stock: "" },
     views: {
       '@': {
-        templateUrl: 'templates/trade.html'
+        templateUrl: 'templates/trade.html',
+        controller: 'TradeCtrl'
       }
     }
   })

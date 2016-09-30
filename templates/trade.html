@@ -1,1 +1,47 @@
-<h1>trade.html</h1>
+<h1>Trade</h1>
+
+<div class="col-md-6">
+
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Symbol</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" ng-model="transaction.stock" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Buy/Sell</label>
+      <select class="form-control" ng-model="transaction.type">
+        <option value="Buy">Buy</option>
+        <option value="Sell">Sell</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Quantity</label>
+      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="e.g. 100" ng-model="transaction.quantity">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Date</label>
+      <input type="text" class="form-control" value="{{ quotes[date.index].date }}" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Price</label>
+      <input type="text" class="form-control" id="exampleInputtext1" value="{{ transaction.price | currency }}" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Total</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" value="{{ transaction.quantity * transaction.price | currency }}" readonly>
+    </div>
+
+
+    <button type="submit" class="btn btn-success">{{transaction.type}}</button>
+  </form>
+</div>
+
+<div class="col-md-6">
+  <p><strong>Cash Available</strong></p>
+  <p><strong>Order Status</strong></p>
+</div>

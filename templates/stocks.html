@@ -1,5 +1,14 @@
 <h1>Stocks</h1>
 
+<p>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="stockFilter">Filter</label>
+      <input type="text" class="form-control" id="stockFilter" placeholder="Stock name, e.g. AAPL" ng-model="stockFilter">
+    </div>
+  </form>
+</p>
+
 <table class="table table-striped">
   <tr>
     <th>Symbol</th>
@@ -10,5 +19,5 @@
     <th>Trade?</th>
   </tr>
 
-  <tr ng-repeat="stock in listings" stock="stock" date-index="date.index" stock-listing></tr>
+  <tr ng-repeat="stock in listings | filter: { symbol: stockFilter }" stock="stock" date-index="date.index" stock-listing></tr>
 </table>
