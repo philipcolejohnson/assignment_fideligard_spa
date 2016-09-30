@@ -1,3 +1,14 @@
 <h1>Stocks</h1>
 
-<div>{{quotes}}</div>
+<table class="table table-striped">
+  <tr>
+    <th>Symbol</th>
+    <th>Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+  </tr>
+
+  <tr ng-repeat="stock in listings" stock="stock" date-index="date.index" stock-listing></tr>
+</table>

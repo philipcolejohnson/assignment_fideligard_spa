@@ -5,11 +5,14 @@ Fideligard.factory('stockService', ['yqlService', 'userService', function(yqlSer
   var _date = userService.getDate();
 
 
-  var findLatestPrice = function(stock, index) {
+  stockService.findLatestPrice = function(stock, index) {
     var price = -1;
 
+
     while (price < 0) {
-      if (_quotes[index].data[stock].Adj_Close) {
+      if (index < 0) { return 0; }
+
+      if (_quotes[index].data[stock]) {
         price = _quotes[index].data[stock].Adj_Close;
       } else { 
         index--;
@@ -20,9 +23,9 @@ Fideligard.factory('stockService', ['yqlService', 'userService', function(yqlSer
   };
 
   stockService.calcPriceChange = function(stock, daysChange) {
-    var targetDay = _date.index + daysChange;
-    var currentPrice = findLatestPrice(stock, _date.index);
-    var price = findLatestPrice(stock, targetDay);
+    var targetDay = Number(_date.index) + daysChange;
+    var currentPrice = stockService.findLatestPrice(stock, _date.index);
+    var price = stockService.findLatestPrice(stock, targetDay);
 
     return price - currentPrice;
   };

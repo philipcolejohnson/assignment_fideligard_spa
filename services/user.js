@@ -3,7 +3,7 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
   var _quotes = yqlService.getStocks();
   var _companies = ["AAPL","ABC"];
   var _date = { index: 182,
-                start: "2015/01/01",
+                start: "2015/01/02",
                 end: "2015/12/31" };
 
   var userService = {};
@@ -15,6 +15,10 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
 
   userService.getDate = function() {
     return _date;
+  };
+
+  userService.getCompanies = function() {
+    return _companies;
   };
 
   return userService;

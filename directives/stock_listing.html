@@ -1,0 +1,6 @@
+<td>{{ stock.symbol }}</td>
+<td>{{ stock.current | currency }}</td>
+<td><span ng-if="dateIndex - 1 >= 0"><span ng-if="stock.one >= 0">+</span>{{ stock.one | currency }}</span></td>
+<td><span ng-if="dateIndex - 7 >= 0"><span ng-if="stock.seven >= 0">+</span>{{ stock.seven | currency }}</span></td>
+<td><span ng-if="dateIndex - 30 >= 0"><span ng-if="stock.thirty >= 0">+</span>{{ stock.thirty | currency }}</span></td>
+<td>Trade</td>
