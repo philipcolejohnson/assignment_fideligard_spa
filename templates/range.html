@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col-md-6">
-  1/1/2015
+  {{ date.start }}
   </div>
   <div class="col-md-3">
-  {{quotes[index].date}}
+  {{ quotes[date.index].date }}
   </div>
   <div class="col-md-3" style="text-align: right">
-  12/31/2015
+  {{ date.end }}
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <input type=range min='0' max='364' step='1' ng-model='index'>
+    <input type=range min='0' max='364' step='1' ng-model='date.index'>
   </div>
 </div>
 
-<div>{{quotes[index]}}</div>
+<div>{{quotes[date.index]}}</div>

@@ -6,6 +6,13 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
 
   $stateProvider.state('dashboard', {
     url: '',
+    resolve: {
+      apiStocks: ['yqlService', 'userService', function (yqlService, userService) {
+        userService.setOptions();
+        return yqlService.apiStocks();
+      }]
+    },
+
     views: {
       'range@': {
         templateUrl: 'templates/range.html',

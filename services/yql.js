@@ -1,20 +1,12 @@
-Fideligard.factory('yqlService', ['$http', function($http) {
+Fideligard.factory('yqlService', ['$http',  function($http) {
 
-  var fideligardService = {};
-  var _companies = ["AAPL","ABC"];
-  var _start = "2015/01/01";
-  var _end = "2015/12/31";
+  var yqlService = {};
+  var _companies = ["AAPL"],
+      _start = "",
+      _end = "";
 
   var _quotes = [];
 
-  var _organize = function(quotes) {
-    var startDate = new Date();
-
-    for (quote in _quotes) {
-
-
-    }
-  }
 
   var parseData = function(response) {
     var data = response.data.query.results.quote;
@@ -22,7 +14,7 @@ Fideligard.factory('yqlService', ['$http', function($http) {
     var startDate = new Date(_start);
     var currentDate = new Date(_start);
     var endDate = new Date(_end);
-    endDate.setDate(endDate.getDate() + 1)
+    endDate.setDate(endDate.getDate() + 1);
     var quotes = [];
 
     // add dates to an array
@@ -32,12 +24,14 @@ Fideligard.factory('yqlService', ['$http', function($http) {
         date: dateString,
         data: {}
       };
+
       quotes.push(dateObj);
 
       currentDate.setDate(currentDate.getDate() + 1);
 
     }
 
+    // add stock data to array
     for (var index in data) {
       var dayDiff= new Date(data[index].Date) - startDate;
       var dateIndex = Math.ceil(dayDiff / (1000 * 3600 * 24));
@@ -62,21 +56,30 @@ Fideligard.factory('yqlService', ['$http', function($http) {
               '&callback=';
   };
 
-  fideligardService.apiStocks = function() {
+  yqlService.apiStocks = function() {
     var url = urlBuilder(_companies);
-    console.log("sending data")
+    console.log("sending data");
+
     return $http.get(url).then(function(response) {
-      console.log("data returned")
+      console.log("data returned");
       angular.copy( parseData(response), _quotes );
     }) ;
   };
 
-  fideligardService.getStocks = function() {
+  yqlService.getStocks = function() {
     return _quotes;
   };
 
-  fideligardService.apiStocks();
+  yqlService.setDates = function(start, end) {
+    _start = start;
+    _end  = end;
+  };
 
-  return fideligardService;
+  yqlService.setCompanies = function(companies) {
+    _companies = companies;
+  };
+
+
+  return yqlService;
 
 }]);
