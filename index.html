@@ -25,9 +25,6 @@
 <body>
 
   <navbar></navbar>
-    <a ui-sref="dashboard.portfolio">Portfolio</a>
-    <a ui-sref="dashboard.trade">Trade</a>
-    <a ui-sref="dashboard.transaction">Transaction</a>
 
     <div class="row">
       <div ui-view="stocks" class="col-md-4 col-md-offset-1"></div>
@@ -54,6 +51,7 @@
 <script type="text/javascript" src="services/yql.js"></script>
 <script type="text/javascript" src="services/stocks.js"></script>
 <script type="text/javascript" src="services/user.js"></script>
+<script type="text/javascript" src="services/transactions.js"></script>
 
 <!-- controllers -->
 <script type="text/javascript" src="controllers/transaction_ctrl.js"></script>

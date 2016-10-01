@@ -1,28 +1,46 @@
-Fideligard.controller('TradeCtrl', ['$scope', 'yqlService', 'stockService', 'userService', '$stateParams', function($scope, yqlService, stockService, userService, $stateParams){
+Fideligard.controller('TradeCtrl', ['$scope', 'yqlService', 'stockService', 'userService', '$stateParams', 'transactionService', function($scope, yqlService, stockService, userService, $stateParams, transactionService){
 
   $scope.transaction = {
     stock: $stateParams.stock,
     quantity: 1,
     price: 0,
-    type: "Buy"
+    type: "Buy",
+    current_balance: 0,
+    total: 0,
+    valid: true
   };
 
   $scope.quotes = yqlService.getStocks();
   $scope.date = userService.getDate();
   $scope.companies = userService.getCompanies();
+  $scope.balance = userService.getBalance();
 
   $scope.$watch('date.index', function(){
-    updateStock();
+    updateInformation();
   });
 
-  var updateStock = function() {
+  $scope.$watch('transaction.stock', function(){
+    updateInformation();
+  });
+
+  $scope.$watch('transaction.quantity', function(){
+    updateInformation();
+  });
+
+  var updateInformation = function() {
+
     if (!$scope.transaction.stock) {
       $scope.transaction.stock = $scope.companies[0];
     }
 
     $scope.transaction.price = stockService.findLatestPrice($scope.transaction.stock, $scope.date.index);
+
+    $scope.transaction.total = $scope.transaction.quantity * $scope.transaction.price;
+
+    $scope.transaction.current_balance = $scope.balance[ $scope.quotes[$scope.date.index].date ];
+    $scope.transaction.valid = transactionService.verify($scope.transaction.total);
   };
 
-  updateStock();
+  updateInformation();
 
 }]);

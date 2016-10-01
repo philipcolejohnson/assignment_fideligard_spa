@@ -5,7 +5,9 @@
   <form>
     <div class="form-group">
       <label for="exampleInputEmail1">Symbol</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" ng-model="transaction.stock" readonly>
+      <select class="form-control" ng-model="transaction.stock">
+        <option value="{{ stock }}" ng-repeat="stock in companies">{{ stock }}</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -33,15 +35,15 @@
 
     <div class="form-group">
       <label for="exampleInputEmail1">Total</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" value="{{ transaction.quantity * transaction.price | currency }}" readonly>
+      <input type="text" class="form-control" id="exampleInputEmail1" value="{{ transaction.total | currency }}" readonly>
     </div>
 
 
-    <button type="submit" class="btn btn-success">{{transaction.type}}</button>
+    <button type="submit" class="btn btn-success btn-lg btn-block" ng-disabled="{{ transaction.valid === false }}">{{transaction.type}}</button>
   </form>
 </div>
 
 <div class="col-md-6">
-  <p><strong>Cash Available</strong></p>
-  <p><strong>Order Status</strong></p>
+  <p><strong>Cash Available: </strong>{{ transaction.current_balance | currency }}</p>
+  <p><strong>Order Status: </strong>{{ transaction.valid }}</p>
 </div>

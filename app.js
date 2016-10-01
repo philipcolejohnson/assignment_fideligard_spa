@@ -8,7 +8,7 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
     url: '',
     resolve: {
       apiStocks: ['yqlService', 'userService', function (yqlService, userService) {
-        userService.setOptions();
+        userService.init();
         return yqlService.apiStocks();
       }]
     },
