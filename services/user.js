@@ -6,16 +6,26 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
                 start: "2015/12/01",
                 end: "2016/03/31" };
   var _startingBalance = 1000;
-  var _balance = {};
+  var _userData = {
+    balance: {},
+    transactions: {},
+    portfolio: {}
+  };
 
-  var initBalance = function() {
+  var _initUserData = function() {
     var currentDate = new Date(_date.start);
     var endDate = new Date(_date.end);
     endDate.setDate(endDate.getDate() + 1);
 
     while ( currentDate < endDate ) {
       var dateString = currentDate.toISOString().slice(0,10);
-      _balance[dateString] = _startingBalance;
+      
+      _userData.balance[dateString] = _startingBalance;
+
+      _userData.portfolio[dateString] = {};
+      for (var i = 0; i < _companies.length; i++) {
+        _userData.portfolio[dateString][ _companies[i] ] = 0;
+      }
 
       currentDate.setDate(currentDate.getDate() + 1);
     }
@@ -26,7 +36,7 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
   userService.init = function() {
     yqlService.setDates(_date.start, _date.end);
     yqlService.setCompanies(_companies);
-    initBalance();
+    _initUserData();
   };
 
   userService.getDate = function() {
@@ -37,8 +47,8 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
     return _companies;
   };
 
-  userService.getBalance = function() {
-    return _balance;
+  userService.getUserData = function() {
+    return _userData;
   };
 
   return userService;
