@@ -28,6 +28,10 @@ Fideligard.controller('TradeCtrl', ['$scope', 'yqlService', 'stockService', 'use
     updateInformation();
   });
 
+  $scope.$watch('transaction.type', function(){
+    updateInformation();
+  });
+
   var updateInformation = function() {
 
     if (!$scope.transaction.stock) {

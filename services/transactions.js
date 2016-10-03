@@ -7,12 +7,13 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
 
   var _updateData = function(transaction) {
     var currentDate = new Date(transaction.date);
+    currentDate.setHours( currentDate.getHours() + 12 );
     var endDate = new Date(_date.end);
     endDate.setDate(endDate.getDate() + 1);
 
     while ( currentDate < endDate ) {
       var dateString = currentDate.toISOString().slice(0,10);
-      
+
       if (transaction.type === "Buy") {
         _userData.portfolio[dateString][transaction.stock] += transaction.quantity;
         _userData.balance[dateString] -= transaction.total;
@@ -29,7 +30,8 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
   };
 
   transactionService.verify = function(transaction) {
-    var currentDate = new Date(_quotes[_date.index].date);
+    var currentDate = new Date(transaction.date);
+    currentDate.setHours( currentDate.getHours() + 12 );
     var endDate = new Date(_date.end);
     endDate.setDate(endDate.getDate() + 1);
 
@@ -38,7 +40,7 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
     while ( currentDate < endDate ) {
       var dateString = currentDate.toISOString().slice(0,10);
       
-      if (_userData.balance[dateString] - transaction.total < 0) {
+      if (transaction.type === "Buy" && _userData.balance[dateString] - transaction.total < 0) {
         return false;
       }
 

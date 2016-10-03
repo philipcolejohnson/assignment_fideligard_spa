@@ -14,6 +14,7 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
 
   var _initUserData = function() {
     var currentDate = new Date(_date.start);
+    currentDate.setHours( currentDate.getHours() + 12 );
     var endDate = new Date(_date.end);
     endDate.setDate(endDate.getDate() + 1);
 
