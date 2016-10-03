@@ -1,0 +1,8 @@
+<td>{{ transaction.date }}</td>
+<td>{{ transaction.stock }}</td>
+<td>{{ transaction.type }}</td>
+<td>{{ transaction.quantity }}</td>
+<td>{{ transaction.price | currency }}</td>
+<td>{{ transaction.total | currency }}</td>
+<td>{{ userData.balance[transaction.date] | currency }}</td>
+<td><button class="btn btn-danger btn-xs" ng-click="delete(transaction)">X</button></td>

@@ -2,6 +2,7 @@ Fideligard.controller('TradeCtrl', ['$scope', 'yqlService', 'stockService', 'use
 
   $scope.transaction = {
     stock: $stateParams.stock,
+    date: "",
     quantity: 1,
     price: 0,
     type: "Buy",
@@ -33,18 +34,23 @@ Fideligard.controller('TradeCtrl', ['$scope', 'yqlService', 'stockService', 'use
       $scope.transaction.stock = $scope.companies[0];
     }
 
+    $scope.transaction.date = $scope.quotes[$scope.date.index].date;
+
     $scope.transaction.price = stockService.findLatestPrice($scope.transaction.stock, $scope.date.index);
 
     $scope.transaction.total = $scope.transaction.quantity * $scope.transaction.price;
 
     $scope.transaction.current_balance = $scope.userData.balance[ $scope.quotes[$scope.date.index].date ];
+    
     $scope.transaction.valid = transactionService.verify($scope.transaction);
+    angular.element( document.querySelector( '#btn-submission' ) ).prop('disabled', !$scope.transaction.valid);
   };
 
   $scope.makeTransaction = function() {
     if(!$scope.transaction.valid) { return false; }
 
     transactionService.addTransaction($scope.transaction);
+    updateInformation();
 
     return true;
   };

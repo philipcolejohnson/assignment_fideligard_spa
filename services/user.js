@@ -8,7 +8,7 @@ Fideligard.factory('userService', ['yqlService', function(yqlService){
   var _startingBalance = 1000;
   var _userData = {
     balance: {},
-    transactions: {},
+    transactions: [],
     portfolio: {}
   };
 

@@ -2,5 +2,6 @@ Fideligard.controller('TransactionCtrl', ['$scope', 'yqlService', 'userService',
 
   $scope.quotes = yqlService.getStocks();
   $scope.date = userService.getDate();
+  $scope.userData = userService.getUserData();
 
 }]);

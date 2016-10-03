@@ -1,1 +1,16 @@
 <h1>Transactions</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Date</th>
+    <th>Symbol</th>
+    <th>Type</th>
+    <th>Quantity</th>
+    <th>Stock Price</th>
+    <th>Total</th>
+    <th>Account Balance</th>
+    <th></th>
+  </tr>
+
+  <tr ng-repeat="transaction in userData.transactions" transaction="transaction" transaction-listing></tr>
+</table>

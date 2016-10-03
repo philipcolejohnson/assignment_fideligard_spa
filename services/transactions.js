@@ -5,8 +5,8 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
   var _date = userService.getDate();
   var _userData = userService.getUserData();
 
-  var _updatePortfolio = function(transaction) {
-    var currentDate = new Date(_quotes[_date.index].date);
+  var _updateData = function(transaction) {
+    var currentDate = new Date(transaction.date);
     var endDate = new Date(_date.end);
     endDate.setDate(endDate.getDate() + 1);
 
@@ -15,8 +15,10 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
       
       if (transaction.type === "Buy") {
         _userData.portfolio[dateString][transaction.stock] += transaction.quantity;
+        _userData.balance[dateString] -= transaction.total;
       } else {
         _userData.portfolio[dateString][transaction.stock] -= transaction.quantity;
+        _userData.balance[dateString] += transaction.total;
       }
 
       currentDate.setDate(currentDate.getDate() + 1);
@@ -52,22 +54,37 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
 
   transactionService.addTransaction = function(transaction) {
     if (transaction.valid) {
-      // create date entry if necessary
-      if (!_userData.transactions[ _quotes[_date.index].date ]) {
-        _userData.transactions[ _quotes[_date.index].date ] = {};
-        _userData.transactions[ _quotes[_date.index].date ][transaction.stock] = {};
-      }
 
-      // enter/change transaction
-      var dateData = _userData.transactions[ _quotes[_date.index].date ];
-      dateData[transaction.stock][transaction.type] = {
+      var newTransaction = {
+        date: _quotes[_date.index].date,
+        stock: transaction.stock,
         price: transaction.price,
         total: transaction.total,
-        quantity: transaction.quantity
+        quantity: transaction.quantity,
+        type: transaction.type
       };
 
-      _updatePortfolio(transaction);
+      _userData.transactions.push(newTransaction);
+
+      _updateData(transaction);
     }
+
+    console.log(_userData.transactions);
+  };
+
+  transactionService.deleteTransaction = function(transaction) {
+    
+    var index = _userData.transactions.indexOf(transaction);
+    _userData.transactions.splice(index, 1);
+
+    if (transaction.type === "Buy") {
+      transaction.type = "Sell";
+    } else {
+      transaction.type = "Buy";
+    }
+
+    _updateData(transaction);
+
 
     console.log(_userData.transactions);
   };
