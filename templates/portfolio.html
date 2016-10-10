@@ -10,7 +10,7 @@
     <th ng-click="toggleFilter('price')">30d</th>
   </tr>
 
-  <h2>Summary</h2>
+  <h4>Summary</h4>
   <tr>
     <td>{{ summary.costBasis | currency }}</td>
     <td>{{ summary.value | currency }}</td>
@@ -22,7 +22,7 @@
   </tr>
 </table>
 
-<h2>Assets</h2>
+<h4>Assets</h4>
 <p>
   <form class="form-inline">
     <div class="form-group">
@@ -51,7 +51,7 @@
     <td class="green">Cash</td>
     <td></td>
     <td class="green">{{ userData.balance[ date.start ] | currency }}</td>
-    <td>{{ userData.balance[ quotes[date.index].date ] | currency }}</td>
+    <td class="green">{{ userData.balance[ quotes[date.index].date ] | currency }}</td>
     <td><span class="{{userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] >= 0 ? 'positive' : 'negative'}}">
 <span ng-if="userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] >= 0">+</span>{{ userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] | currency }}</td>
     <td></td>

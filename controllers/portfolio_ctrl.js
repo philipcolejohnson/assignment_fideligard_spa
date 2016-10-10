@@ -120,19 +120,15 @@ Fideligard.controller('PortfolioCtrl', ['$scope', 'yqlService', 'userService', '
       thirty: 0
     };
 
-    // cash
-    $scope.summary.costBasis += $scope.userData.balance[ $scope.quotes[$scope.date.index].date ];
-    $scope.summary.value += $scope.userData.balance[ $scope.quotes[$scope.date.index].date ];
-
     // stocks
     for (var i in $scope.positions) {
       $scope.summary.costBasis += $scope.positions[i].costBasis;
       $scope.summary.value += $scope.positions[i].value;
+      $scope.summary.profit += $scope.positions[i].profit;
       $scope.summary.one += $scope.positions[i].one;
       $scope.summary.seven += $scope.positions[i].seven;
       $scope.summary.thirty += $scope.positions[i].thirty;
     }
-    $scope.summary.profit = $scope.summary.value - $scope.summary.costBasis;
   };
 
 
