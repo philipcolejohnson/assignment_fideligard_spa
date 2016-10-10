@@ -2,12 +2,12 @@
 
 <table class="table table-striped">
   <tr>
-    <th ng-click="toggleFilter('quantity')">Cost Basis</th>
-    <th ng-click="toggleFilter('type')">Current Value</th>
-    <th ng-click="toggleFilter('quantity')">Profit/Loss</th>
-    <th ng-click="toggleFilter('price')">1d</th>
-    <th ng-click="toggleFilter('price')">7d</th>
-    <th ng-click="toggleFilter('price')">30d</th>
+    <th>Cost Basis</th>
+    <th>Current Value</th>
+    <th>Profit/Loss</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
   </tr>
 
   <h4>Summary</h4>
@@ -36,13 +36,13 @@
   <tr>
     <th ng-click="toggleFilter('stock')">Symbol</th>
     <th ng-click="toggleFilter('quantity')">Quantity</th>
-    <th ng-click="toggleFilter('quantity')">Cost Basis</th>
-    <th ng-click="toggleFilter('type')">Current Value</th>
-    <th ng-click="toggleFilter('quantity')">Profit/Loss</th>
-    <th ng-click="toggleFilter('price')">Current Price</th>
-    <th ng-click="toggleFilter('price')">1d</th>
-    <th ng-click="toggleFilter('price')">7d</th>
-    <th ng-click="toggleFilter('price')">30d</th>
+    <th ng-click="toggleFilter('costBasis')">Cost Basis</th>
+    <th ng-click="toggleFilter('value')">Current Value</th>
+    <th ng-click="toggleFilter('profit')">Profit/Loss</th>
+    <th ng-click="toggleFilter('currentPrice')">Current Price</th>
+    <th ng-click="toggleFilter('one')">1d</th>
+    <th ng-click="toggleFilter('seven')">7d</th>
+    <th ng-click="toggleFilter('thirty')">30d</th>
     <th>Trade</th>
   </tr>
 
@@ -62,5 +62,5 @@
   </tr>
 
   <!-- stocks -->
-  <tr ng-repeat="position in positions | filter: stockFilter" position="position" position-listing></tr>
+  <tr ng-repeat="position in positions | filter: stockFilter | orderBy: transFilter.type : transFilter.rev" position="position" position-listing></tr>
 </table>
