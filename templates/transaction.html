@@ -1,16 +1,26 @@
 <h1>Transactions</h1>
 
+<p>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="stockFilter">Filter</label>
+      <input type="text" class="form-control" id="stockFilter" placeholder="Stock name, e.g. AAPL" ng-model="stockFilter">
+    </div>
+  </form>
+</p>
+
 <table class="table table-striped">
   <tr>
-    <th>Date</th>
-    <th>Symbol</th>
-    <th>Type</th>
-    <th>Quantity</th>
-    <th>Stock Price</th>
-    <th>Total</th>
+    <th ng-click="toggleFilter('date')">Date</th>
+    <th ng-click="toggleFilter('stock')">Symbol</th>
+    <th ng-click="toggleFilter('type')">Type</th>
+    <th ng-click="toggleFilter('quantity')">Quantity</th>
+    <th ng-click="toggleFilter('price')">Stock Price</th>
+    <th ng-click="toggleFilter('total')">Total</th>
     <th>Account Balance</th>
-    <th></th>
+    <!-- <th></th> -->
   </tr>
 
-  <tr ng-repeat="transaction in userData.transactions" transaction="transaction" transaction-listing></tr>
+  <tr ng-repeat="transaction in userData.transactions | orderBy: transFilter.type:transFilter.rev | filter: { stock: stockFilter }" transaction="transaction" transaction-listing></tr>
 </table>
+

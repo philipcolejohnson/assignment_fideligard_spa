@@ -1,1 +1,44 @@
 <h1>Portfolio</h1>
+
+<p>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="stockFilter">Filter</label>
+      <input type="text" class="form-control" id="stockFilter" placeholder="Stock name, e.g. AAPL" ng-model="stockFilter">
+    </div>
+  </form>
+</p>
+
+<table class="table table-striped">
+  <tr>
+    <th ng-click="toggleFilter('stock')">Symbol</th>
+    <th ng-click="toggleFilter('quantity')">Quantity</th>
+    <th ng-click="toggleFilter('quantity')">Cost Basis</th>
+    <th ng-click="toggleFilter('type')">Current Value</th>
+    <th ng-click="toggleFilter('quantity')">Profit/Loss</th>
+    <th ng-click="toggleFilter('price')">Current Price</th>
+    <th ng-click="toggleFilter('price')">1d</th>
+    <th ng-click="toggleFilter('price')">7d</th>
+    <th ng-click="toggleFilter('price')">30d</th>
+    <th>Trade</th>
+  </tr>
+
+  <!-- cash money -->
+  <tr class="green">
+    <td>Cash</td>
+    <td>{{ userData.balance[ quotes[date.index].date ] | currency }}</td>
+    <td>{{ userData.balance[ date.start ] | currency }}</td>
+    <td>{{ userData.balance[ quotes[date.index].date ] | currency }}</td>
+    <td>{{ userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] | currency }}</td>
+    <td>{{ 1 | currency }}</td>
+    <td>{{ 0 | currency }}</td>
+    <td>{{ 0 | currency }}</td>
+    <td>{{ 0 | currency }}</td>
+    <td></td>
+  </tr>
+
+  <!-- stocks -->
+  <tr ng-repeat="position in positions" position="position" position-listing></tr>
+</table>
+
+{{ positions }}

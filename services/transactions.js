@@ -60,7 +60,7 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
       var newTransaction = {
         date: _quotes[_date.index].date,
         stock: transaction.stock,
-        price: transaction.price,
+        price: Number(transaction.price),
         total: transaction.total,
         quantity: transaction.quantity,
         type: transaction.type

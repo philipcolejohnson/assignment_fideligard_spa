@@ -1,0 +1,27 @@
+<td>{{ position.stock }}</td>
+
+<td>{{ position.quantity }}</td>
+
+<td>{{ position.costBasis | currency }}</td>
+
+<td>{{ position.value | currency }}</td>
+
+<td><span class="{{ position.profit >= 0 ? 'positive' : 'negative'}}">
+<span ng-if="position.profit >= 0">+</span>{{ position.profit | currency }}</span>
+</td>
+
+<td>{{ position.currentPrice | currency }}</td>
+
+<td><span class="{{position.one >= 0 ? 'positive' : 'negative'}}">
+<span ng-if="position.one >= 0">+</span>{{ position.one | currency }}</span>
+</td>
+
+<td><span class="{{position.seven >= 0 ? 'positive' : 'negative'}}">
+<span ng-if="position.seven >= 0">+</span>{{ position.seven | currency }}</span>
+</td>
+
+<td><span class="{{position.thirty >= 0 ? 'positive' : 'negative'}}">
+<span ng-if="position.thirty >= 0">+</span>{{ position.thirty | currency }}</span>
+</td>
+
+<td><a ui-sref="dashboard.trade( { stock: position.stock } )">Trade</a></td>

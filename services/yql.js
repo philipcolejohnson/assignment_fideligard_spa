@@ -46,12 +46,14 @@ Fideligard.factory('yqlService', ['$http',  function($http) {
 
   var urlBuilder = function(companyArray) {
     var companyString = "'" + companyArray.join("','") + "'";
+    var startDate = _start.replace(/-/g, '/');
+    var endDate = _end.replace(/-/g, '/');
 
     return 'http://query.yahooapis.com/v1/public/yql?q=' +
               'select * from yahoo.finance.historicaldata ' +
               'where symbol in (' + companyString + ') ' +
-              'and startDate = "' + _start + '" ' +
-              'and endDate = "' + _end + '" ' +
+              'and startDate = "' + startDate + '" ' +
+              'and endDate = "' + endDate + '" ' +
               '&format=json '+
               '&diagnostics=true ' +
               '&env=store://datatables.org/alltableswithkeys ' +

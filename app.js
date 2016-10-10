@@ -30,7 +30,8 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
     url: '/portfolio',
     views: {
       '@': {
-        templateUrl: 'templates/portfolio.html'
+        templateUrl: 'templates/portfolio.html',
+        controller: 'PortfolioCtrl'
       }
     }
   })

@@ -1,17 +1,14 @@
 <h1>Date</h1>
 
 <div class="row">
-  <div class="col-md-5">
-  {{ quotes[min].date }}
-  </div>
-  <div class="col-md-1">
-    <strong>Current:</strong>
-  </div>
   <div class="col-md-3">
-    <strong>{{ quotes[date.index].date }}</strong>
+  {{ quotes[min].date | date: 'MM/dd/yyyy' }}
+  </div>
+  <div class="col-md-6" style="text-align: center">
+    <strong>Current: {{ quotes[date.index].date | date: 'MMM dd, yyyy (EEEE)' }}</strong>
   </div>
   <div class="col-md-3" style="text-align: right">
-  {{ quotes[max].date }}
+  {{ quotes[max].date | date: 'MM/dd/yyyy' }}
   </div>
 </div>
 
