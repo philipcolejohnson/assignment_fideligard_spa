@@ -1,5 +1,28 @@
 <h1>Portfolio</h1>
 
+<table class="table table-striped">
+  <tr>
+    <th ng-click="toggleFilter('quantity')">Cost Basis</th>
+    <th ng-click="toggleFilter('type')">Current Value</th>
+    <th ng-click="toggleFilter('quantity')">Profit/Loss</th>
+    <th ng-click="toggleFilter('price')">1d</th>
+    <th ng-click="toggleFilter('price')">7d</th>
+    <th ng-click="toggleFilter('price')">30d</th>
+  </tr>
+
+  <h2>Summary</h2>
+  <tr>
+    <td>{{ summary.costBasis | currency }}</td>
+    <td>{{ summary.value | currency }}</td>
+    <td><span class="{{summary.profit >= 0 ? 'positive' : 'negative'}}">
+<span ng-if="summary.profit >= 0">+</span>{{ summary.profit | currency }}</td>
+    <td>{{ summary.one | currency }}</td>
+    <td>{{ summary.seven | currency }}</td>
+    <td>{{ summary.thirty | currency }}</td>
+  </tr>
+</table>
+
+<h2>Assets</h2>
 <p>
   <form class="form-inline">
     <div class="form-group">
@@ -24,21 +47,20 @@
   </tr>
 
   <!-- cash money -->
-  <tr class="green">
-    <td>Cash</td>
+  <tr>
+    <td class="green">Cash</td>
+    <td></td>
+    <td class="green">{{ userData.balance[ date.start ] | currency }}</td>
     <td>{{ userData.balance[ quotes[date.index].date ] | currency }}</td>
-    <td>{{ userData.balance[ date.start ] | currency }}</td>
-    <td>{{ userData.balance[ quotes[date.index].date ] | currency }}</td>
-    <td>{{ userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] | currency }}</td>
-    <td>{{ 1 | currency }}</td>
-    <td>{{ 0 | currency }}</td>
-    <td>{{ 0 | currency }}</td>
-    <td>{{ 0 | currency }}</td>
+    <td><span class="{{userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] >= 0 ? 'positive' : 'negative'}}">
+<span ng-if="userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] >= 0">+</span>{{ userData.balance[ quotes[date.index].date ] - userData.balance[ date.start ] | currency }}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td></td>
   </tr>
 
   <!-- stocks -->
-  <tr ng-repeat="position in positions" position="position" position-listing></tr>
+  <tr ng-repeat="position in positions | filter: stockFilter" position="position" position-listing></tr>
 </table>
-
-{{ positions }}

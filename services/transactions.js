@@ -24,7 +24,6 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
 
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    console.log(_userData.portfolio)
 
     return true;
   };
@@ -71,7 +70,6 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
       _updateData(transaction);
     }
 
-    console.log(_userData.transactions);
   };
 
   transactionService.deleteTransaction = function(transaction) {
@@ -87,8 +85,6 @@ Fideligard.factory('transactionService', ['yqlService', 'userService', function(
 
     _updateData(transaction);
 
-
-    console.log(_userData.transactions);
   };
 
   return transactionService;

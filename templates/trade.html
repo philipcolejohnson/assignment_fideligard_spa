@@ -45,5 +45,5 @@
 
 <div class="col-md-6">
   <p><strong>Cash Available: </strong>{{ transaction.current_balance | currency }}</p>
-  <p><strong>Order Status: </strong>{{ transaction.valid }}</p>
+  <p><strong>Order Status: </strong>{{ transaction.valid ? "VALID" : "INVALID"}}</p>
 </div>

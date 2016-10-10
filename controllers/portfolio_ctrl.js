@@ -93,25 +93,47 @@ Fideligard.controller('PortfolioCtrl', ['$scope', 'yqlService', 'userService', '
         }
         // create position
         var price = stockService.findLatestPrice(stock, $scope.date.index);
+        var quantity = portf[today][stock];
 
         $scope.positions.push({
           stock: stock,
-          quantity: portf[today][stock],
+          quantity: quantity,
           costBasis: costBasis,
           currentPrice: price,
-          value: price * portf[today][stock],
-          profit: price * portf[today][stock] - costBasis,
-          one: stockService.calcPriceChange(stock, -1),
-          seven: stockService.calcPriceChange(stock, -7),
-          thirty: stockService.calcPriceChange(stock, -30)
+          value: price * quantity,
+          profit: price * quantity - costBasis,
+          one: stockService.calcPriceChange(stock, -1) * quantity,
+          seven: stockService.calcPriceChange(stock, -7) * quantity,
+          thirty: stockService.calcPriceChange(stock, -30) * quantity
         });
 
       }
     }
 
+    // summary
+    $scope.summary = {
+      costBasis: 0,
+      value: 0,
+      profit: 0,
+      one: 0,
+      seven: 0,
+      thirty: 0
+    };
 
+    // cash
+    $scope.summary.costBasis += $scope.userData.balance[ $scope.quotes[$scope.date.index].date ];
+    $scope.summary.value += $scope.userData.balance[ $scope.quotes[$scope.date.index].date ];
+
+    // stocks
+    for (var i in $scope.positions) {
+      $scope.summary.costBasis += $scope.positions[i].costBasis;
+      $scope.summary.value += $scope.positions[i].value;
+      $scope.summary.one += $scope.positions[i].one;
+      $scope.summary.seven += $scope.positions[i].seven;
+      $scope.summary.thirty += $scope.positions[i].thirty;
+    }
+    $scope.summary.profit = $scope.summary.value - $scope.summary.costBasis;
   };
 
-  generatePortfolio();
 
 }]);
