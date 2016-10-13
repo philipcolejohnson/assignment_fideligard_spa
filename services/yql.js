@@ -63,7 +63,7 @@ Fideligard.factory('yqlService', ['$http',  function($http) {
   yqlService.apiStocks = function() {
     var url = urlBuilder(_companies);
     // DEV URL
-    url = "/assets/dev_data.json"
+    // url = "/assets/dev_data.json"
     // **************
     console.log("sending data to:");
     console.log(url);
